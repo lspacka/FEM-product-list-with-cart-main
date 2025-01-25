@@ -1,3 +1,13 @@
+:root {
+  --red:     hsl(14, 86%, 42%);
+  --green:   hsl(159, 69%, 38%);
+  --rose50:  hsl(20, 50%, 98%);
+  --rose100: hsl(13, 31%, 94%);
+  --rose300: hsl(14, 25%, 72%);
+  --rose500: hsl(12, 20%, 44%);
+  --rose900: hsl(14, 65%, 9%);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,15 +19,122 @@ html {
   font-size: 16px;
 }
 
+body {
+  background-color: var(--rose50);
+  padding: 1.5em 0;  /* clamp */
+}
+
 img {
   max-inline-size: 100%;
+  align-self: center;
+}
+
+.main-container {
+  max-width: 1200px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+/* .desserts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+} */
+
+.dessert {
+  padding-bottom: 1.5em;
 }
 
 .dessert-img {
-  width: 170px;
-  height: 170px;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 16/10;
+  border-radius: 7px;
+}
+
+.waffle-img {
+  background-image: url(assets/images/image-waffle-mobile.jpg);
+}
+
+.creme-img {
+  background-image: url(assets/images/image-creme-brulee-mobile.jpg);
+}
+
+.macaron-img {
+  background-image: url(assets/images/image-macaron-mobile.jpg);
+}
+
+.tiramisu-img {
+  background-image: url(assets/images/image-tiramisu-mobile.jpg);
+}
+
+.baklava-img {
+  background-image: url(assets/images/image-baklava-mobile.jpg);
+}
+
+.pie-img {
+  background-image: url(assets/images/image-meringue-mobile.jpg);
+}
+
+.cake-img {
+  background-image: url(assets/images/image-cake-mobile.jpg);
+}
+
+.brownie-img {
+  background-image: url(assets/images/image-brownie-mobile.jpg);
+}
+
+.panna-img {
+  background-image: url(assets/images/image-panna-cotta-mobile.jpg);
 }
 
 .add-button {
   display: flex;
+  place-content: center;
+  gap: 7px;
+  padding: 0.7em 0 0.5em;  /* clamp? */
+  border: 1.5px solid var(--rose300);
+  width: 60%;  /* clamp? */
+  border-radius: 50px;
+  margin: 0 auto;
+  font-size: 0.79rem;  /* clamp? */
+  background-color: white;
+  transform: translateY(-50%);
+}
+
+.cart {
+  /* display: flex;
+  flex-direction: column;
+  gap: 1em; */
+  background-color: white;
+  padding: 1.5em;
+  border-radius: 10px;
+}
+
+.empty-cart-img {
+  display: flex;
+  justify-content: center;
+  padding: 1.5em 0 1em;
+}
+
+.cart-msg {
+  font-size: 0.8rem;  /* clamp */
+  text-align: center;
+}
+
+@media screen and (min-width:800px) {
+  .main-container {
+    display: flex;
+    gap: 2em;
+  }
+  .desserts {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  }
 }
