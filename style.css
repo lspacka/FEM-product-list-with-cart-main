@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'red hat';
+  src: url(assets/fonts/RedHatText-VariableFont_wght.ttf);
+}
+
 :root {
   --red:     hsl(14, 86%, 42%);
   --green:   hsl(159, 69%, 38%);
@@ -6,6 +11,7 @@
   --rose300: hsl(14, 25%, 72%);
   --rose500: hsl(12, 20%, 44%);
   --rose900: hsl(14, 65%, 9%);
+  --wat: hsl(16, 11%, 20%);
 }
 
 * {
@@ -22,11 +28,22 @@ html {
 body {
   background-color: var(--rose50);
   padding: 1.5em 0;  /* clamp */
+  font-family: 'red hat';
+  color: var(--rose900);
+  /* font-weight: 400; */
 }
 
 img {
   max-inline-size: 100%;
   align-self: center;
+}
+
+/* h3 {
+  text-align: center;
+} */
+
+h3, .dessert-info p {       /* refactor? */
+  font-weight: 600;
 }
 
 .main-container {
@@ -103,9 +120,27 @@ img {
   width: 60%;  /* clamp? */
   border-radius: 50px;
   margin: 0 auto;
-  font-size: 0.79rem;  /* clamp? */
+  font-size: 0.72rem;  /* clamp? */
   background-color: white;
   transform: translateY(-50%);
+}
+
+.dessert-info p {
+  margin-bottom: 0.27em;
+}
+
+.type {
+  color: var(--rose300);
+  font-size: 0.87rem;
+}
+
+.price, .cart-header {
+  color: var(--red);
+}
+
+.cart p {
+  font-weight: 600;
+  color: var(--rose500);
 }
 
 .cart {
@@ -115,6 +150,7 @@ img {
   background-color: white;
   padding: 1.5em;
   border-radius: 10px;
+  height: fit-content;
 }
 
 .empty-cart-img {
