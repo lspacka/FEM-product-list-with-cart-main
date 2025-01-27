@@ -27,10 +27,9 @@ html {
 
 body {
   background-color: var(--rose50);
-  padding: clamp(1.5rem, 6vw, 4.5rem) 0;  /* clamp */
+  padding: clamp(1.5rem, 6vw, 4.5rem) 0;  
   font-family: 'red hat';
   color: var(--rose900);
-  /* font-weight: 400; */
 }
 
 img {
@@ -38,11 +37,7 @@ img {
   align-self: center;
 }
 
-/* h3 {
-  height: fit-content;
-} */
-
-h3, .dessert-info p {       /* refactor? */
+h3, .dessert-info p {       
   font-weight: 600;
 }
 
@@ -57,12 +52,6 @@ h3, .dessert-info p {       /* refactor? */
   flex-direction: column;
   gap: 1.5em;
 }
-
-/* .desserts {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-} */
 
 .dessert {
   padding-bottom: 1.5em;
@@ -115,12 +104,12 @@ h3, .dessert-info p {       /* refactor? */
   display: flex;
   place-content: center;
   gap: 7px;
-  padding: 0.7em 0 0.5em;  /* clamp? */
+  padding: 0.7em 0 0.5em; 
   border: 1.5px solid var(--rose300);
-  width: 60%;  /* clamp? */
+  width: 60%;  
   border-radius: 50px;
   margin: 0 auto;
-  font-size: 0.72rem;  /* clamp? 0.72rem*/
+  font-size: 0.72rem;  
   background-color: white;
   transform: translateY(-50%);
 }
@@ -130,10 +119,6 @@ h3, .dessert-info p {       /* refactor? */
   border-color: var(--red);
   color: var(--red);
 }
-
-/* .add-button h3 {
-  align-self: center;
-} */
 
 .dessert-info p {
   margin-bottom: 0.24em;
@@ -154,9 +139,6 @@ h3, .dessert-info p {       /* refactor? */
 }
 
 .cart {
-  /* display: flex;
-  flex-direction: column;
-  gap: 1em; */
   background-color: white;
   padding: 1.5em;
   border-radius: 10px;
@@ -231,20 +213,15 @@ h3, .dessert-info p {       /* refactor? */
   
   .add-button {
     gap: 0;
-    padding: 0.6em 0 0.4em;  /* clamp? */
-    /* border: 1.5px solid var(--rose300); */
-    width: 85%;  /* clamp? */
-    /* border-radius: 50px; */
-    /* margin: 0 auto; */
-    font-size: 0.6rem;  /* clamp? 0.72rem*/
-    /* background-color: white; */
-    /* transform: translateY(-50%); */
+    padding: 0.6em 0 0.4em; 
+    width: 85%;  
+    font-size: 0.6rem;  
   }
   .add-button img {
     inline-size: 85%;
   }
   h3 {
-    padding-top: 0.2em;
+    padding-top: 0.1em;
   }
 }
 
@@ -286,9 +263,9 @@ h3, .dessert-info p {       /* refactor? */
   }
 
   .add-button {
-    gap: 5px;
+    gap: 4px;
     padding: 0.7em 0 0.5em;
-    width: 65%;
+    width: 60%;
     font-size: 0.67rem;
   }
   h3 {
