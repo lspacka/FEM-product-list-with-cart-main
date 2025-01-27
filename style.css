@@ -125,6 +125,12 @@ h3, .dessert-info p {       /* refactor? */
   transform: translateY(-50%);
 }
 
+.add-button:hover {
+  cursor: pointer;
+  border-color: var(--red);
+  color: var(--red);
+}
+
 /* .add-button h3 {
   align-self: center;
 } */
@@ -138,11 +144,11 @@ h3, .dessert-info p {       /* refactor? */
   font-size: 0.87rem;
 }
 
-.price, .cart-header {
+.price, .cart-header, .cart-items {
   color: var(--red);
 }
 
-.cart p {
+.cart-msg {
   font-weight: 600;
   color: var(--rose500);
 }
@@ -155,6 +161,10 @@ h3, .dessert-info p {       /* refactor? */
   padding: 1.5em;
   border-radius: 10px;
   height: fit-content;
+}
+
+.cart-header {
+  display: flex;
 }
 
 .empty-cart-img {
@@ -181,7 +191,7 @@ h3, .dessert-info p {       /* refactor? */
     gap: 1.2em;
   }
   .dessert-img {
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
   }
   .waffle-img {
     background-image: url(assets/images/image-waffle-tablet.jpg);
@@ -220,17 +230,18 @@ h3, .dessert-info p {       /* refactor? */
   }
   
   .add-button {
-    display: flex;
-    place-content: center;
-    gap: 7px;
+    gap: 0;
     padding: 0.6em 0 0.4em;  /* clamp? */
     /* border: 1.5px solid var(--rose300); */
-    width: 80%;  /* clamp? */
+    width: 85%;  /* clamp? */
     /* border-radius: 50px; */
     /* margin: 0 auto; */
-    font-size: 0.67rem;  /* clamp? 0.72rem*/
+    font-size: 0.6rem;  /* clamp? 0.72rem*/
     /* background-color: white; */
     /* transform: translateY(-50%); */
+  }
+  .add-button img {
+    inline-size: 85%;
   }
   h3 {
     padding-top: 0.2em;
@@ -272,5 +283,15 @@ h3, .dessert-info p {       /* refactor? */
   
   .panna-img {
     background-image: url(assets/images/image-panna-cotta-desktop.jpg);
+  }
+
+  .add-button {
+    gap: 5px;
+    padding: 0.7em 0 0.5em;
+    width: 65%;
+    font-size: 0.67rem;
+  }
+  h3 {
+    padding: 0;
   }
 }
