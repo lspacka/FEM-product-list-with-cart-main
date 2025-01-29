@@ -32,6 +32,21 @@ buttons.forEach((button, index) => {
             desserts[index].quantity++
             console.log(cart)
             // change button
+            // button.innerHTML = ''
+            // this just for testing
+            // better to have the buttons already created and styled, and then just add them here
+            // button.classList.add('no-hover')
+            button.innerHTML = `
+                <div class="dec-quant"><img src="assets/images/icon-decrement-quantity.svg" alt="decrement sign" class="order-img"></div>
+                <label class="order-label">${desserts[index].quantity}</label>
+                <div class="inc-quant"><img src="assets/images/icon-increment-quantity.svg" alt="increment sign" class="order-img"></div>
+            `
+            button.style.backgroundColor = 'hsl(14, 86%, 42%)'
+            button.style.border = 'none'
+            button.style.justifyContent = 'space-evenly'
+            button.style.alignItems = 'center'
+            button.style.cursor = 'initial'
+            // button.style.padding = '0.7em 0 0.7em 0'
             // change cart
         } else {
             return
