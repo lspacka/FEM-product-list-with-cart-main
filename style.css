@@ -1,3 +1,9 @@
+/* 
+  TODO:
+    - fix layout shift when clicking order button + -
+    - fix order button items centering on desktop
+*/
+
 @font-face {
   font-family: 'red hat';
   src: url(assets/fonts/RedHatText-VariableFont_wght.ttf);
