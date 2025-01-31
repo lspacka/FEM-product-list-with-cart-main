@@ -7,6 +7,10 @@ const cart = []
 // const order_btns = []
 let order_quant = 0
 let total = 0
+// let dec_btn
+// let inc_btn
+// let order_label
+let total_label
 
 class Dessert {
     constructor(type, name, price){
@@ -33,7 +37,6 @@ cart_items.textContent = `(${order_quant})`
 
 buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
-        // console.log(index)
         if (!cart.includes(desserts[index])) {
             cart.push(desserts[index])
             desserts[index].quantity++
@@ -72,7 +75,7 @@ buttons.forEach((button, index) => {
             const dec_btn = document.getElementById(`dec-${index}`)
             const inc_btn = document.getElementById(`inc-${index}`)
             const order_label = document.getElementById(`label-${index}`)
-            const total_label = document.querySelector('.ot-label-2')
+            total_label = document.querySelector('.ot-label-2')
 
             order_quant++
             total += desserts[index].price
@@ -80,7 +83,7 @@ buttons.forEach((button, index) => {
             total_label.textContent = `$${total}`
 
             dec_btn.addEventListener('click', () => {
-                if (desserts[index].quantity == 0 || total == 0)
+                if (desserts[index].quantity == 0)
                     return          // change to normal button?
                                               
                 desserts[index].quantity--
@@ -96,6 +99,8 @@ buttons.forEach((button, index) => {
                 // console.log(typeof desserts[index].price)
                 // console.log(desserts[index].quantity)
                 // console.log(desserts[index])
+                console.log('this index price: ', desserts[index].price)
+                console.log('this index total: ', total)
             })
 
             inc_btn.addEventListener('click', () => {
@@ -111,13 +116,25 @@ buttons.forEach((button, index) => {
                 // console.log('order quantity', order_quant)
                 // console.log(desserts[index].quantity)
                 // console.log(desserts[index])
+                console.log('this index price: ', desserts[index].price)
+                console.log('this index total: ', total)
             })
-
             // button.style.padding = '0.7em 0 0.7em 0'
             // change cart
         } else {
-            return
+          return  
         }
+        
+        // if (cart.includes(desserts[index])) {
+        //     dec_btn.addEventListener('click', () => {
+        //         total_label.textContent = `$${total}`
+        //     })
+
+        //     inc_btn.addEventListener('click', () => {
+        //         total_label.textContent = `$${total}`
+        //     })
+        // }
+        
 
         // desserts[index].quantity++
         // console.log(cart)
