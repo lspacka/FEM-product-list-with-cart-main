@@ -24,7 +24,7 @@ for (let data of desserts_data) {
     dessert.type = array[0].textContent
     dessert.name = array[1].textContent
     // dessert.price = Number(array[2].textContent.match(/[\d.]+/)[0])
-    dessert.price = array[2].textContent.split('$')[1]
+    dessert.price = Number(array[2].textContent.split('$')[1])
     dessert.quantity = 0
     desserts.push(dessert)
 }
@@ -38,6 +38,20 @@ buttons.forEach((button, index) => {
             cart.push(desserts[index])
             desserts[index].quantity++
             // console.log(cart)
+
+            cart_content.innerHTML = `
+                <ul class="item-list"></ul>
+                <div class="order-total">
+                    <label class="ot-label-1">Order Total</label>
+                    <label class="ot-label-2">&dollar;0</label>
+                </div>
+                <div class="carbon-free">
+                    <div class="tree"><img src="assets/images/icon-carbon-neutral.svg" alt="" class="tree-img"></div>
+                    <h4 class="carbon-msg">This is a <b>carbon-neutral</b> delivery.</h4>
+                </div>
+                <button class="confirm-order">Confirm Order</button>
+            `
+
             button.innerHTML = `
                 <div class="dec-quant" id="dec-${index}">
                     <img src="assets/images/icon-decrement-quantity.svg" alt="decrement sign" class="order-img" >
@@ -55,22 +69,28 @@ buttons.forEach((button, index) => {
             button.style.cursor = 'initial'
             // order_btns.push(button)
 
-            order_quant++
-            cart_items.textContent = `(${order_quant})`
-
             const dec_btn = document.getElementById(`dec-${index}`)
             const inc_btn = document.getElementById(`inc-${index}`)
             const order_label = document.getElementById(`label-${index}`)
+            const total_label = document.querySelector('.ot-label-2')
+
+            order_quant++
+            total += desserts[index].price
+            cart_items.textContent = `(${order_quant})`
+            total_label.textContent = `$${total}`
 
             dec_btn.addEventListener('click', () => {
-                if (desserts[index].quantity == 0)
+                if (desserts[index].quantity == 0 || total == 0)
                     return          // change to normal button?
                                               
                 desserts[index].quantity--
                 order_quant--
+                total -= desserts[index].price
                 order_label.textContent = `${desserts[index].quantity}`
                 cart_items.textContent = `(${order_quant})`
+                total_label.textContent = `$${total}`
 
+                // console.log(index)
                 // console.log(cart)
                 // console.log('order quantity: ', order_quant)
                 // console.log(typeof desserts[index].price)
@@ -81,22 +101,17 @@ buttons.forEach((button, index) => {
             inc_btn.addEventListener('click', () => {
                 desserts[index].quantity++
                 order_quant++
+                total += desserts[index].price
                 order_label.textContent = `${desserts[index].quantity}`
                 cart_items.textContent = `(${order_quant})`
+                total_label.textContent = `$${total}`
+
+                // console.log(index)
                 // console.log(cart)
                 // console.log('order quantity', order_quant)
                 // console.log(desserts[index].quantity)
                 // console.log(desserts[index])
             })
-
-            // ul.item-list
-            // carbon free message
-            // confirm order button and event listener
-            
-            // cart.forEach((item, index) => {
-            //   create elements with classes
-            //   append elements to parent <li> 
-            // })
 
             // button.style.padding = '0.7em 0 0.7em 0'
             // change cart
