@@ -21,7 +21,11 @@ class Dessert {
         this.name = name
         this.price = price
         this.quantity
+        this.total
     }
+    // calcTotal() {
+    //     return this.price * this.quantity
+    // }
 }
 
 for (let data of desserts_data) {
@@ -33,8 +37,11 @@ for (let data of desserts_data) {
     // dessert.price = Number(array[2].textContent.match(/[\d.]+/)[0])
     dessert.price = Number(array[2].textContent.split('$')[1])
     dessert.quantity = 0
+    // dessert.total = dessert.calcTotal()
     desserts.push(dessert)
 }
+
+// console.log(desserts)
 
 cart_items.textContent = `(${order_quant})`
 const ul = document.createElement('ul')
@@ -79,30 +86,13 @@ buttons.forEach((button, index) => {
                 </div>
             `
             
-            // render cart items
+            //////  RENDER CART ITEMS //////
+
             const item_list = document.querySelector('.item-list')
-            // cart.forEach((item) => {
-            //     const li = document.createElement('li')
-
-            //     li.style.listStyle = 'none'
-            //     li.className = 'item'
-            //     li.innerHTML = `
-            //         <div class="item-info">
-            //             <h4 class="item-name">${item.name}</h4>
-            //             <label class="item-quantity">${item.quantity}x</label>
-            //             <label class="item-price">@$${item.price.toFixed(2)}</label>
-            //             <label class="item-total">$${(item.price*item.quantity).toFixed(2)}</label>
-            //         </div>
-            //         <div class="remove-item">
-            //             <img src="assets/images/icon-remove-item.svg" alt="remove icon">
-            //         </div>
-            //     `
-            //     item_list.appendChild(li)
-            // })
-
             const item = document.createElement('li')
             const item_info = document.createElement('div')
             const item_name = document.createElement('h4')
+            const item_figs = document.createElement('div')
             const item_quantity = document.createElement('label')
             const item_price = document.createElement('label')
             const item_total = document.createElement('label')
@@ -112,6 +102,7 @@ buttons.forEach((button, index) => {
             item.className = 'item'
             item_info.className = 'item-info'
             item_name.className = 'item-name'
+            item_figs.className = 'item-figs'
             item_quantity.className = 'item-quantity'
             item_price.className = 'item-price'
             item_total.className = 'item-total'
@@ -119,8 +110,10 @@ buttons.forEach((button, index) => {
             remove_icon.className = 'remove-icon'
 
             item.style.listStyle = 'none'
+            // item.setAttribute('id', '')
             item_quantity.setAttribute('id', `quantity-${index}`)
             item_total.setAttribute('id', `total-${index}`)
+            remove_icon.setAttribute('id', `remove-${index}`)
             remove_icon.setAttribute('src', 'assets/images/icon-remove-item.svg')
             remove_icon.setAttribute('alt', 'remove icon')
 
@@ -129,10 +122,26 @@ buttons.forEach((button, index) => {
             item_price.textContent = `@$${desserts[index].price.toFixed(2)}` 
             item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`   // !
 
-            item_info.append(item_name, item_quantity, item_price, item_total)
-            remove_item.append(remove_icon)
+            item_figs.append(item_quantity, item_price, item_total)
+            item_info.append(item_name, item_figs)
+
+            cart.forEach((cartItem, cartIndex) => {
+                remove_icon.setAttribute('id', `remove-${cartIndex}`)
+                item.setAttribute('id', `item-${cartIndex}`)
+                // add event listener
+                remove_icon.addEventListener('click', () => {
+                    cart.splice(cartIndex, 1)
+                    item_list.removeChild(item_list[item.id])
+                    console.log(cart)
+                })
+                
+                remove_item.appendChild(remove_icon)
+            })
+
             item.append(item_info, remove_item)
             item_list.append(item)
+
+            ////////////////////////////////
 
             button.style.backgroundColor = 'hsl(14, 86%, 42%)'
             button.style.border = 'none'
@@ -143,18 +152,7 @@ buttons.forEach((button, index) => {
             const dec_btn = document.getElementById(`dec-${index}`)
             const inc_btn = document.getElementById(`inc-${index}`)
             const order_label = document.getElementById(`label-${index}`)
-            // const item_quantity = document.querySelector('.item-quantity')
-            // const item_total = document.querySelector('.item-total')
-            // item_quantity.setAttribute('id', `quantity-${index}`)
-            // item_total.setAttribute('id', `total-${index}`)
             total_label = document.querySelector('.ot-label-2')
-
-            // item_list.forEach(item => {
-            //     const item_quantity = document.querySelector('.item-quantity')
-            //     const item_total = document.querySelector('.item-total')
-            //     item_quantity.setAttribute('id', `quantity-${index}`)
-            //     item_total.setAttribute('id', `total-${index}`)
-            // })
 
             order_quant++
             total += desserts[index].price
@@ -171,7 +169,7 @@ buttons.forEach((button, index) => {
                 order_label.textContent = `${desserts[index].quantity}`
                 cart_items.textContent = `(${order_quant})`
                 item_quantity.textContent = `${desserts[index].quantity}x`
-                item_total.textContent = `${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
+                item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
 
                 if (total == 0) 
                     total_label.textContent = `$${total}`
@@ -179,7 +177,7 @@ buttons.forEach((button, index) => {
                     total_label.textContent = `$${total.toFixed(2)}`
 
                 // console.log(index)
-                // console.log(cart)
+                console.log(cart)
                 // console.log('order quantity: ', order_quant)
                 // console.log(typeof desserts[index].price)
                 // console.log(desserts[index].quantity)
@@ -190,16 +188,18 @@ buttons.forEach((button, index) => {
 
             inc_btn.addEventListener('click', () => {
                 desserts[index].quantity++
+                desserts[index].total = desserts[index].quantity * desserts[index].price
                 order_quant++
                 total += desserts[index].price
                 order_label.textContent = `${desserts[index].quantity}`
                 cart_items.textContent = `(${order_quant})`
                 total_label.textContent = `$${total.toFixed(2)}`
                 item_quantity.textContent = `${desserts[index].quantity}x`
-                item_total.textContent = `${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
+                // item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
+                item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
 
                 // console.log(index)
-                // console.log(cart)
+                console.log(cart)
                 // console.log('order quantity', order_quant)
                 // console.log(desserts[index].quantity)
                 // console.log(desserts[index])

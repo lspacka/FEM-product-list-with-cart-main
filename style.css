@@ -18,6 +18,7 @@
   --rose500: hsl(12, 20%, 44%);
   --rose900: hsl(14, 65%, 9%);
   --wat: hsl(16, 11%, 20%);
+  --rem-gray: rgb(203, 177, 169);
 }
 
 * {
@@ -230,6 +231,56 @@ h3 {
 .cart-msg {
   font-size: 0.8rem;  /* clamp */
   text-align: center;
+}
+
+/* CART WITH ITEMS */
+
+.item {
+  display: flex;
+}
+
+.item-figs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.remove-item {
+  margin-left: auto;
+  align-self: center;
+  width: 15px;
+  height: 15px;
+  
+  /* border: 1.5px solid var(--rem-gray);
+  border-radius: 50%; */
+}
+
+.remove-icon {
+  width: 100%;
+  height: 100%;
+  border: 1.5px solid var(--rem-gray);
+  border-radius: 50%;
+  padding: 0.1em;
+  transition: ease-in-out 0.3s
+}
+
+.remove-item:hover {
+  cursor: pointer;
+}
+
+.remove-item:hover .remove-icon {
+  filter: 
+    brightness(0) 
+    saturate(100%) 
+    invert(8%) 
+    sepia(35%) 
+    saturate(503%) 
+    hue-rotate(330deg) 
+    brightness(96%) 
+    contrast(103%);
+}
+
+.carbon-free {
+  display: flex;
 }
 
 @media screen and (min-width:800px) {
