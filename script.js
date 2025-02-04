@@ -3,7 +3,7 @@ const buttons = document.querySelectorAll('.add-button')
 const cart_items = document.querySelector('.cart-items')
 const cart_content = document.querySelector('.cart-content')
 const desserts = []
-const cart = []
+let cart = []
 let order_quant = 0
 let total = 0
 // let dec_btn
@@ -22,6 +22,7 @@ class Dessert {
         this.price = price
         this.quantity
         this.total
+        this.index          // index for cart array
     }
     // calcTotal() {
     //     return this.price * this.quantity
@@ -37,6 +38,7 @@ for (let data of desserts_data) {
     // dessert.price = Number(array[2].textContent.match(/[\d.]+/)[0])
     dessert.price = Number(array[2].textContent.split('$')[1])
     dessert.quantity = 0
+    dessert.index = 0
     // dessert.total = dessert.calcTotal()
     desserts.push(dessert)
 }
@@ -47,12 +49,15 @@ cart_items.textContent = `(${order_quant})`
 const ul = document.createElement('ul')
 let cart_elements = document.createElement('div')
 ul.className = 'item-list'
+let cart_index = 0
 
 buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
         if (!cart.includes(desserts[index])) {
             cart.push(desserts[index])
+            desserts[index].index = cart.indexOf(desserts[index])
             desserts[index].quantity++
+            desserts[index].total = desserts[index].price * desserts[index].quantity
             // console.log(cart)
             
             if (!cart_content.contains(ul)) {
@@ -85,6 +90,12 @@ buttons.forEach((button, index) => {
                     <img src="assets/images/icon-increment-quantity.svg" alt="increment sign" class="order-img">
                 </div>
             `
+
+            button.style.backgroundColor = 'hsl(14, 86%, 42%)'
+            button.style.border = 'none'
+            button.style.justifyContent = 'space-evenly'
+            button.style.alignItems = 'center'
+            button.style.cursor = 'initial'
             
             //////  RENDER CART ITEMS //////
 
@@ -118,36 +129,74 @@ buttons.forEach((button, index) => {
             remove_icon.setAttribute('alt', 'remove icon')
 
             item_name.textContent = `${desserts[index].name}`
-            item_quantity.textContent = `${desserts[index].quantity}`   // !
+            item_quantity.textContent = `${desserts[index].quantity}x`   // !
             item_price.textContent = `@$${desserts[index].price.toFixed(2)}` 
-            item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`   // !
+            // item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`   // !
+            item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
 
             item_figs.append(item_quantity, item_price, item_total)
             item_info.append(item_name, item_figs)
 
-            cart.forEach((cartItem, cartIndex) => {
-                remove_icon.setAttribute('id', `remove-${cartIndex}`)
-                item.setAttribute('id', `item-${cartIndex}`)
-                // add event listener
-                remove_icon.addEventListener('click', () => {
-                    cart.splice(cartIndex, 1)
-                    item_list.removeChild(item_list[item.id])
-                    console.log(cart)
-                })
+            // cart.forEach((cartItem, cartIndex) => {
+            //     remove_icon.setAttribute('id', `remove-${cartIndex}`)
+            //     item.setAttribute('id', `${cartIndex}`)
+            //     // add event listener
+            //     remove_icon.addEventListener('click', () => {
+            //         cart.splice(cartIndex, 1)
+            //         // item_list.removeChild(item_list[item.id])
+            //         // console.log('after delete: ', cart)
+            //     })
                 
-                remove_item.appendChild(remove_icon)
+            //     remove_item.appendChild(remove_icon)
+            // })
+
+            remove_icon.setAttribute('id', `remove-${cart_index}`)
+            item.setAttribute('id', `${cart_index}`)
+            // let items = document.querySelectorAll('.item-list')
+
+            remove_icon.addEventListener('click', () => {
+                cart.splice(desserts[index].index, 1)
+                item_list.removeChild(item)
+                order_quant -= desserts[index].quantity
+                total -= desserts[index].total
+                desserts[index].quantity = 0
+                desserts[index].total = 0
+
+                cart_items.textContent = `(${order_quant})`
+                order_label.textContent = `${desserts[index].quantity}`
+                total_label.textContent = `$${total.toFixed(2)}`
+                console.log('before reorg: ', cart)
+
+                cart.forEach((cartItem, cartIndex) => {
+                    cartItem.index = cartIndex
+                })
+                // return button to inital state
+                // button.innerHTML = ''
+                button.innerHTML = `
+                    <div class="cart-img"><img src="assets/images/icon-add-to-cart.svg" alt="cart icon"></div>
+                    <h3>Add to Cart</h3>
+                `
+                // button.style.backgroundColor = 'revert'
+                // button.style.border = 'initial'
+                // button.style.justifyContent = 'initial'
+                // button.style.alignItems = 'initial'
+                // button.style.cursor = 'initial'
+                console.log(button)
+                // console.log('after delete: ', cart)
             })
+            remove_item.append(remove_icon)
+            cart_index++
 
             item.append(item_info, remove_item)
             item_list.append(item)
 
             ////////////////////////////////
 
-            button.style.backgroundColor = 'hsl(14, 86%, 42%)'
-            button.style.border = 'none'
-            button.style.justifyContent = 'space-evenly'
-            button.style.alignItems = 'center'
-            button.style.cursor = 'initial'
+            // button.style.backgroundColor = 'hsl(14, 86%, 42%)'
+            // button.style.border = 'none'
+            // button.style.justifyContent = 'space-evenly'
+            // button.style.alignItems = 'center'
+            // button.style.cursor = 'initial'
 
             const dec_btn = document.getElementById(`dec-${index}`)
             const inc_btn = document.getElementById(`inc-${index}`)
