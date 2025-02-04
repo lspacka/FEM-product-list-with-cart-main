@@ -52,6 +52,8 @@ ul.className = 'item-list'
 let cart_index = 0
 
 buttons.forEach((button, index) => {
+    button.classList.add('inactive')
+    // button.classList.toggle('inactive')
     button.addEventListener('click', () => {
         if (!cart.includes(desserts[index])) {
             cart.push(desserts[index])
@@ -90,14 +92,14 @@ buttons.forEach((button, index) => {
                     <img src="assets/images/icon-increment-quantity.svg" alt="increment sign" class="order-img">
                 </div>
             `
-
-            button.style.backgroundColor = 'hsl(14, 86%, 42%)'
-            button.style.border = 'none'
-            button.style.justifyContent = 'space-evenly'
-            button.style.alignItems = 'center'
-            button.style.cursor = 'initial'
+            button.classList.add('active')
+            // button.style.backgroundColor = 'hsl(14, 86%, 42%)'
+            // button.style.border = 'none'
+            // button.style.justifyContent = 'space-evenly'
+            // button.style.alignItems = 'center'
+            // button.style.cursor = 'initial'
             
-            //////  RENDER CART ITEMS //////
+            /////////  RENDER CART ITEMS //////////
 
             const item_list = document.querySelector('.item-list')
             const item = document.createElement('li')
@@ -176,11 +178,8 @@ buttons.forEach((button, index) => {
                     <div class="cart-img"><img src="assets/images/icon-add-to-cart.svg" alt="cart icon"></div>
                     <h3>Add to Cart</h3>
                 `
-                // button.style.backgroundColor = 'revert'
-                // button.style.border = 'initial'
-                // button.style.justifyContent = 'initial'
-                // button.style.alignItems = 'initial'
-                // button.style.cursor = 'initial'
+                // button.classList.toggle('inactive', true)
+                button.classList.remove('active')
                 console.log(button)
                 // console.log('after delete: ', cart)
             })
@@ -190,7 +189,7 @@ buttons.forEach((button, index) => {
             item.append(item_info, remove_item)
             item_list.append(item)
 
-            ////////////////////////////////
+            //////////////////////////////////////
 
             // button.style.backgroundColor = 'hsl(14, 86%, 42%)'
             // button.style.border = 'none'
