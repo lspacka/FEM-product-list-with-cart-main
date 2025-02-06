@@ -6,13 +6,6 @@ const desserts = []
 let cart = []
 let order_quant = 0
 let total = 0
-// let dec_btn
-// let inc_btn
-// let order_label
-// let item_list
-// let li
-// let item_quantity
-// let item_total
 let total_label
 
 class Dessert {
@@ -22,11 +15,9 @@ class Dessert {
         this.price = price
         this.quantity
         this.total
-        this.index          // index for cart array
+        this.id
+        this.index                  // index for cart array
     }
-    // calcTotal() {
-    //     return this.price * this.quantity
-    // }
 }
 
 for (let data of desserts_data) {
@@ -35,14 +26,12 @@ for (let data of desserts_data) {
 
     dessert.type = array[0].textContent
     dessert.name = array[1].textContent
-    // dessert.price = Number(array[2].textContent.match(/[\d.]+/)[0])
     dessert.price = Number(array[2].textContent.split('$')[1])
     dessert.quantity = 0
     dessert.index = 0
-    // dessert.total = dessert.calcTotal()
+    dessert.id = data.parentElement.classList[1]
     desserts.push(dessert)
 }
-
 // console.log(desserts)
 
 cart_items.textContent = `(${order_quant})`
@@ -53,7 +42,6 @@ let cart_index = 0
 
 buttons.forEach((button, index) => {
     button.classList.add('inactive')
-    // button.classList.toggle('inactive')
     button.addEventListener('click', () => {
         if (!cart.includes(desserts[index])) {
             cart.push(desserts[index])
@@ -68,7 +56,6 @@ buttons.forEach((button, index) => {
             } 
                 
             cart_elements.innerHTML = `
-                <!-- <ul class="item-list"></ul> -->
                 <div class="order-total">
                     <label class="ot-label-1">Order Total</label>
                     <label class="ot-label-2">&dollar;0</label>
@@ -93,16 +80,12 @@ buttons.forEach((button, index) => {
                 </div>
             `
             button.classList.add('active')
-            // button.style.backgroundColor = 'hsl(14, 86%, 42%)'
-            // button.style.border = 'none'
-            // button.style.justifyContent = 'space-evenly'
-            // button.style.alignItems = 'center'
-            // button.style.cursor = 'initial'
             
             /////////  RENDER CART ITEMS //////////
 
             const item_list = document.querySelector('.item-list')
             const item = document.createElement('li')
+            const item_thumb = document.createElement('div')
             const item_info = document.createElement('div')
             const item_name = document.createElement('h4')
             const item_figs = document.createElement('div')
@@ -111,8 +94,13 @@ buttons.forEach((button, index) => {
             const item_total = document.createElement('label')
             const remove_item = document.createElement('div')
             const remove_icon = document.createElement('img')
+            const confirm_order = document.querySelector('.confirm-order')
+            const order_modal = document.querySelector('.order-modal')
+            const overlay = document.querySelector('.overlay')
+            const order_list = document.querySelector('.order-list')
 
             item.className = 'item'
+            item_thumb.className = 'item-thumb'
             item_info.className = 'item-info'
             item_name.className = 'item-name'
             item_figs.className = 'item-figs'
@@ -123,7 +111,7 @@ buttons.forEach((button, index) => {
             remove_icon.className = 'remove-icon'
 
             item.style.listStyle = 'none'
-            // item.setAttribute('id', '')
+            item.setAttribute('id', `${desserts[index].id}`)
             item_quantity.setAttribute('id', `quantity-${index}`)
             item_total.setAttribute('id', `total-${index}`)
             remove_icon.setAttribute('id', `remove-${index}`)
@@ -133,28 +121,13 @@ buttons.forEach((button, index) => {
             item_name.textContent = `${desserts[index].name}`
             item_quantity.textContent = `${desserts[index].quantity}x`   // !
             item_price.textContent = `@$${desserts[index].price.toFixed(2)}` 
-            // item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`   // !
             item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
 
             item_figs.append(item_quantity, item_price, item_total)
             item_info.append(item_name, item_figs)
 
-            // cart.forEach((cartItem, cartIndex) => {
-            //     remove_icon.setAttribute('id', `remove-${cartIndex}`)
-            //     item.setAttribute('id', `${cartIndex}`)
-            //     // add event listener
-            //     remove_icon.addEventListener('click', () => {
-            //         cart.splice(cartIndex, 1)
-            //         // item_list.removeChild(item_list[item.id])
-            //         // console.log('after delete: ', cart)
-            //     })
-                
-            //     remove_item.appendChild(remove_icon)
-            // })
-
             remove_icon.setAttribute('id', `remove-${cart_index}`)
-            item.setAttribute('id', `${cart_index}`)
-            // let items = document.querySelectorAll('.item-list')
+            // item.setAttribute('id', `${cart_index}`)    
 
             remove_icon.addEventListener('click', () => {
                 cart.splice(desserts[index].index, 1)
@@ -164,38 +137,76 @@ buttons.forEach((button, index) => {
                 desserts[index].quantity = 0
                 desserts[index].total = 0
 
+                if (total < 0)
+                    total = 0
+
                 cart_items.textContent = `(${order_quant})`
                 order_label.textContent = `${desserts[index].quantity}`
                 total_label.textContent = `$${total.toFixed(2)}`
-                console.log('before reorg: ', cart)
+                // console.log('before reorg: ', cart)
 
                 cart.forEach((cartItem, cartIndex) => {
                     cartItem.index = cartIndex
                 })
-                // return button to inital state
-                // button.innerHTML = ''
+                // reset button to inital state
                 button.innerHTML = `
                     <div class="cart-img"><img src="assets/images/icon-add-to-cart.svg" alt="cart icon"></div>
                     <h3>Add to Cart</h3>
                 `
-                // button.classList.toggle('inactive', true)
                 button.classList.remove('active')
-                console.log(button)
-                // console.log('after delete: ', cart)
             })
+
+            
+            // console.log('ITEMS: ', items)
+
+            // confirm_order.addEventListener('click', () => {
+            //     order_modal.style.display = 'block'
+            //     overlay.style.display = 'block'
+            //     // document.body.style.position = 'fixed'
+
+            //     console.log(items)
+
+            //     // items.forEach((orderItem, orderIndex) => {
+            //     //     console.log(orderItem)
+            //     // })
+            // })
+
+            // items.forEach((orderItem, orderIndex) => {
+            //     console.log(orderItem)
+            // })
+
             remove_item.append(remove_icon)
             cart_index++
 
-            item.append(item_info, remove_item)
+            item.append(item_thumb, item_info, remove_item)
             item_list.append(item)
 
-            //////////////////////////////////////
+            const items = document.querySelectorAll('.item')
+            const thumbnails = document.querySelectorAll('.item-thumb')
+            console.log('items: ', items)
 
-            // button.style.backgroundColor = 'hsl(14, 86%, 42%)'
-            // button.style.border = 'none'
-            // button.style.justifyContent = 'space-evenly'
-            // button.style.alignItems = 'center'
-            // button.style.cursor = 'initial'
+            confirm_order.addEventListener('click', () => {
+                order_modal.style.display = 'block'
+                overlay.style.display = 'block'
+                // document.body.style.position = 'fixed'
+
+                items.forEach((orderItem, orderIndex) => {
+                    // copy item and remove X button
+                    const item = orderItem
+                    
+                    // item.removeChild()
+                    // add thumbnail  
+                    order_list.append(item)
+                })
+
+                thumbnails.forEach(thumbnail => {
+                    const item_img = document.createElement('img')
+                    item_img.setAttribute('src', `assets/images/image-${item.id}-thumbnail.jpg`)
+                    thumbnail.append(item_img)
+                })
+            })
+
+            //////////////////////////////////////
 
             const dec_btn = document.getElementById(`dec-${index}`)
             const inc_btn = document.getElementById(`inc-${index}`)
@@ -209,11 +220,12 @@ buttons.forEach((button, index) => {
 
             dec_btn.addEventListener('click', () => {
                 if (desserts[index].quantity == 0)
-                    return          // change to normal button?
+                    return      
                                               
                 desserts[index].quantity--
                 order_quant--
                 total -= desserts[index].price
+                
                 order_label.textContent = `${desserts[index].quantity}`
                 cart_items.textContent = `(${order_quant})`
                 item_quantity.textContent = `${desserts[index].quantity}x`
@@ -225,7 +237,7 @@ buttons.forEach((button, index) => {
                     total_label.textContent = `$${total.toFixed(2)}`
 
                 // console.log(index)
-                console.log(cart)
+                // console.log(cart)
                 // console.log('order quantity: ', order_quant)
                 // console.log(typeof desserts[index].price)
                 // console.log(desserts[index].quantity)
@@ -239,15 +251,15 @@ buttons.forEach((button, index) => {
                 desserts[index].total = desserts[index].quantity * desserts[index].price
                 order_quant++
                 total += desserts[index].price
+
                 order_label.textContent = `${desserts[index].quantity}`
                 cart_items.textContent = `(${order_quant})`
                 total_label.textContent = `$${total.toFixed(2)}`
                 item_quantity.textContent = `${desserts[index].quantity}x`
-                // item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
                 item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
 
                 // console.log(index)
-                console.log(cart)
+                // console.log(cart)
                 // console.log('order quantity', order_quant)
                 // console.log(desserts[index].quantity)
                 // console.log(desserts[index])

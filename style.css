@@ -157,6 +157,30 @@ h3, .dessert-info p {
   color: initial; */
 }
 
+.order-modal {
+  display: none;
+  z-index: 2;
+  margin: 0 auto;
+  background: white;
+  width: fit-content;
+  padding: 2em 1.5em 1.5em;
+  border-radius: 10px;
+  position: fixed;
+  top: 5%;
+  /* transform: translateY(-10vh); */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(0, 2%, 12%, 0.70);
+  display: none; 
+  z-index: 1;
+}
+
 h3 {
   padding-top: 0.1em;
 }
