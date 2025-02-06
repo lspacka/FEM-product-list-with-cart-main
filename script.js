@@ -182,8 +182,8 @@ buttons.forEach((button, index) => {
             item_list.append(item)
 
             const items = document.querySelectorAll('.item')
-            const thumbnails = document.querySelectorAll('.item-thumb')
-            console.log('items: ', items)
+            // const thumbnails = document.querySelectorAll('.item-thumb')
+            // console.log('items: ', items)
 
             confirm_order.addEventListener('click', () => {
                 order_modal.style.display = 'block'
@@ -191,19 +191,24 @@ buttons.forEach((button, index) => {
                 // document.body.style.position = 'fixed'
 
                 items.forEach((orderItem, orderIndex) => {
-                    // copy item and remove X button
-                    const item = orderItem
-                    
+                    // clone item and remove X button
+                    // const item = orderItem
                     // item.removeChild()
-                    // add thumbnail  
-                    order_list.append(item)
+                    const thumbnail = document.querySelector('.item-thumb')
+                    const item_img = document.createElement('img')
+
+                    item_img.setAttribute('src', `assets/images/image-${orderItem.id}-thumbnail.jpg`)
+                    thumbnail.append(item_img)
+                    console.log(items)
+                    order_list.append(orderItem)
+
                 })
 
-                thumbnails.forEach(thumbnail => {
-                    const item_img = document.createElement('img')
-                    item_img.setAttribute('src', `assets/images/image-${item.id}-thumbnail.jpg`)
-                    thumbnail.append(item_img)
-                })
+                // thumbnails.forEach(thumbnail => {
+                //     const item_img = document.createElement('img')
+                //     item_img.setAttribute('src', `assets/images/image-${item.id}-thumbnail.jpg`)
+                //     thumbnail.append(item_img)
+                // })
             })
 
             //////////////////////////////////////
