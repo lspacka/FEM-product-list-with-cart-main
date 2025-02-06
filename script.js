@@ -156,25 +156,6 @@ buttons.forEach((button, index) => {
                 button.classList.remove('active')
             })
 
-            
-            // console.log('ITEMS: ', items)
-
-            // confirm_order.addEventListener('click', () => {
-            //     order_modal.style.display = 'block'
-            //     overlay.style.display = 'block'
-            //     // document.body.style.position = 'fixed'
-
-            //     console.log(items)
-
-            //     // items.forEach((orderItem, orderIndex) => {
-            //     //     console.log(orderItem)
-            //     // })
-            // })
-
-            // items.forEach((orderItem, orderIndex) => {
-            //     console.log(orderItem)
-            // })
-
             remove_item.append(remove_icon)
             cart_index++
 
@@ -182,33 +163,37 @@ buttons.forEach((button, index) => {
             item_list.append(item)
 
             const items = document.querySelectorAll('.item')
+            // const confirmed_total = document.querySelector('.confirmed-total')
+            const confirmed_label = document.querySelector('.cot-label-2')
             // const thumbnails = document.querySelectorAll('.item-thumb')
             // console.log('items: ', items)
 
             confirm_order.addEventListener('click', () => {
+                if (!item_list.hasChildNodes())
+                    return
+
                 order_modal.style.display = 'block'
                 overlay.style.display = 'block'
                 // document.body.style.position = 'fixed'
-
+                
                 items.forEach((orderItem, orderIndex) => {
-                    // clone item and remove X button
-                    // const item = orderItem
-                    // item.removeChild()
-                    const thumbnail = document.querySelector('.item-thumb')
+                    const modal_item = orderItem.cloneNode(true)
+                    const remove_button = modal_item.querySelector('.remove-item')
+
+                    modal_item.removeChild(remove_button)
+                    const thumbnail = modal_item.querySelector('.item-thumb')
                     const item_img = document.createElement('img')
 
-                    item_img.setAttribute('src', `assets/images/image-${orderItem.id}-thumbnail.jpg`)
+                    item_img.setAttribute('src', `assets/images/image-${modal_item.id}-thumbnail.jpg`)
                     thumbnail.append(item_img)
-                    console.log(items)
-                    order_list.append(orderItem)
-
+                    order_list.append(modal_item)
                 })
 
-                // thumbnails.forEach(thumbnail => {
-                //     const item_img = document.createElement('img')
-                //     item_img.setAttribute('src', `assets/images/image-${item.id}-thumbnail.jpg`)
-                //     thumbnail.append(item_img)
-                // })
+                confirmed_label.textContent = total_label.textContent
+                // const order_total = document.querySelector('.order-total')
+                // const confirmed_total = order_total.cloneNode(true)
+
+                // order_modal.appendChild(confirmed_total)
             })
 
             //////////////////////////////////////
