@@ -32,7 +32,6 @@ for (let data of desserts_data) {
     dessert.id = data.parentElement.classList[1]
     desserts.push(dessert)
 }
-// console.log(desserts)
 
 cart_items.textContent = `(${order_quant})`
 const ul = document.createElement('ul')
@@ -48,7 +47,6 @@ buttons.forEach((button, index) => {
             desserts[index].index = cart.indexOf(desserts[index])
             desserts[index].quantity++
             desserts[index].total = desserts[index].price * desserts[index].quantity
-            // console.log(cart)
             
             if (!cart_content.contains(ul)) {
                 cart_content.innerHTML = ''
@@ -143,7 +141,6 @@ buttons.forEach((button, index) => {
                 cart_items.textContent = `(${order_quant})`
                 order_label.textContent = `${desserts[index].quantity}`
                 total_label.textContent = `$${total.toFixed(2)}`
-                // console.log('before reorg: ', cart)
 
                 cart.forEach((cartItem, cartIndex) => {
                     cartItem.index = cartIndex
@@ -162,11 +159,41 @@ buttons.forEach((button, index) => {
             item.append(item_thumb, item_info, remove_item)
             item_list.append(item)
 
+            // const items = document.querySelectorAll('.item')
+            // const confirmed_label = document.querySelector('.cot-label-2')
+            // const new_order_btn = document.querySelector('.new-order')
+
+            // confirm_order.addEventListener('click', () => {
+            //     if (!item_list.hasChildNodes())
+            //         return
+
+            //     order_modal.style.display = 'block'
+            //     overlay.style.display = 'block'
+            //     // document.body.style.position = 'fixed'
+            //     confirmed_label.textContent = total_label.textContent
+                
+            //     items.forEach((orderItem, orderIndex) => {
+            //         const modal_item = orderItem.cloneNode(true)
+            //         const remove_button = modal_item.querySelector('.remove-item')
+
+            //         modal_item.removeChild(remove_button)
+            //         const thumbnail = modal_item.querySelector('.item-thumb')
+            //         const item_img = document.createElement('img')
+
+            //         item_img.setAttribute('src', `assets/images/image-${modal_item.id}-thumbnail.jpg`)
+            //         thumbnail.append(item_img)
+            //         order_list.append(modal_item)
+            //     })
+            // })
+
+            // new_order_btn.addEventListener('click', () => {
+            //     console.log('RESET!')
+            // })
+
+            //////////////////////////////////////
+
             const items = document.querySelectorAll('.item')
-            // const confirmed_total = document.querySelector('.confirmed-total')
             const confirmed_label = document.querySelector('.cot-label-2')
-            // const thumbnails = document.querySelectorAll('.item-thumb')
-            // console.log('items: ', items)
 
             confirm_order.addEventListener('click', () => {
                 if (!item_list.hasChildNodes())
@@ -175,6 +202,7 @@ buttons.forEach((button, index) => {
                 order_modal.style.display = 'block'
                 overlay.style.display = 'block'
                 // document.body.style.position = 'fixed'
+                confirmed_label.textContent = total_label.textContent
                 
                 items.forEach((orderItem, orderIndex) => {
                     const modal_item = orderItem.cloneNode(true)
@@ -189,14 +217,11 @@ buttons.forEach((button, index) => {
                     order_list.append(modal_item)
                 })
 
-                confirmed_label.textContent = total_label.textContent
-                // const order_total = document.querySelector('.order-total')
-                // const confirmed_total = order_total.cloneNode(true)
-
-                // order_modal.appendChild(confirmed_total)
+                const new_order_btn = document.querySelector('.new-order')
+                new_order_btn.addEventListener('click', () => {
+                    location.reload()                                           // choosing my battles innit
+                })
             })
-
-            //////////////////////////////////////
 
             const dec_btn = document.getElementById(`dec-${index}`)
             const inc_btn = document.getElementById(`inc-${index}`)

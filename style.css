@@ -2,6 +2,7 @@
   TODO:
     - fix layout shift when clicking order button + -
     - fix order button items centering on desktop
+    - fix + - buttons padding on mobile
 */
 
 @font-face {
@@ -243,6 +244,7 @@ h3 {
 
 .cart-header {
   display: flex;
+  margin-bottom: 0.5em;
 }
 
 .empty-cart-img {
@@ -260,11 +262,46 @@ h3 {
 
 .item {
   display: flex;
+  border-bottom: 1.5px solid var(--rose100);
+  padding-top: 1em;
 }
+
+/* .item-info {
+  gap: 2em;
+} */
 
 .item-figs {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 1.1em;
+  padding: 0.5em 0 0.9em;
+  font-size: clamp(0.9rem, 4vw, 1rem);
+}
+
+.item-name,
+.ot-label-1,
+.carbon-msg,
+.item-price,
+.item-total {
+  color: var(--rose500);
+}
+
+.item-name,
+.ot-label-1 {
+  font-size: clamp(0.8rem, 4vw, 1rem) ;
+}
+
+.item-quantity {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.item-price {
+  font-weight: 300;
+}
+
+.item-total {
+  font-weight: 600;
 }
 
 .remove-item {
@@ -272,6 +309,7 @@ h3 {
   align-self: center;
   width: 15px;
   height: 15px;
+  transform: translateY(-50%);
   
   /* border: 1.5px solid var(--rem-gray);
   border-radius: 50%; */
@@ -302,8 +340,55 @@ h3 {
     contrast(103%);
 }
 
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 0;
+}
+
+.ot-label-1 {
+  color: var(--rose900);
+}
+
+.ot-label-2 {
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
+  color: var(--rose900);
+  font-weight: 700;
+}
+
 .carbon-free {
   display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  background-color: var(--rose100);
+  border-radius: 5px;
+  padding: 1em;
+  font-size: clamp(0.68rem, 3vw, 1rem);
+}
+
+.tree {
+  height: fit-content;
+}
+
+.tree-img {
+  inline-size: 80%;
+}
+
+.carbon-msg {
+  align-self: center;
+}
+
+.confirm-order {
+  margin-top: 1.5em;
+  font-family: inherit;
+  font-weight: 600;
+  background-color: var(--red);
+  width: 100%;
+  height: 40px;
+  color: var(--rose100);
+  border: none;
+  border-radius: 50px;
 }
 
 /* MODAL */
@@ -401,6 +486,8 @@ h3 {
   /* h3 {
     padding-top: 0.1em;
   } */
+
+  /* CART WITH ITEMS */
 }
 
 @media screen and (min-width: 1100px) {

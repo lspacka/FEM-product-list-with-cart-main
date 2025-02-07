@@ -26,5 +26,7 @@ Users should be able to:
 - CSS
 - JavaScript
 
+### Author
+
 - [Frontend Mentor](https://www.frontendmentor.io/profile/lspacka)
 - [Twitter](https://www.twitter.com/lspacka)
