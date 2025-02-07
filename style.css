@@ -4,13 +4,14 @@
     - fix + - buttons padding on mobile
     - fix order button items centering on desktop
     - fix layout shift when clicking order button + -
+    - fix padding on remove item buttons
     - fix space at active cart header
 */
 
-@font-face {
+/* @font-face {
   font-family: 'red hat';
   src: url(assets/fonts/RedHatText-VariableFont_wght.ttf);
-}
+} */
 
 :root {
   --red:     hsl(14, 86%, 42%);
@@ -38,7 +39,7 @@ html {
 body {
   background-color: var(--rose50);
   padding: clamp(1.5rem, 6vw, 4.5rem) 0;  
-  font-family: 'red hat';
+  font-family: 'red hat text';
   color: var(--rose900);
 }
 
@@ -290,8 +291,9 @@ h3 {
 }
 
 .item-name,
-.ot-label-1 {
-  font-size: clamp(0.8rem, 4vw, 1rem) ;
+.ot-label-1,
+.cot-label-1 {
+  font-size: clamp(0.8rem, 4vw, 1rem);
 }
 
 .item-quantity {
@@ -343,22 +345,33 @@ h3 {
     contrast(103%);
 }
 
-.order-total {
+.order-total,
+.confirmed-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5em 0;
 }
 
-.ot-label-1 {
+.ot-label-1,
+.cot-label-1 {
   color: var(--rose900);
 }
 
-.ot-label-2 {
-  font-size: clamp(1.2rem, 5vw, 1.7rem);
+.ot-label-2,
+.cot-label-2 {
   color: var(--rose900);
   font-weight: 700;
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
 }
+
+/* .ot-label-2 {
+  font-size: clamp(1.2rem, 5vw, 1.7rem);
+} */
+
+/* .cot-label-2 {
+  font-size: 
+} */
 
 .carbon-free {
   display: flex;
@@ -382,7 +395,8 @@ h3 {
   align-self: center;
 }
 
-.confirm-order {
+.confirm-order,
+.new-order {
   margin-top: 1.5em;
   font-family: inherit;
   font-weight: 600;
@@ -401,12 +415,83 @@ h3 {
   z-index: 2;
   margin: 0 auto;
   background: white;
-  width: fit-content;
+  /* width: fit-content; */
   padding: 2em 1.5em 1.5em;
   border-radius: 10px;
   position: fixed;
   top: 5%;
   /* transform: translateY(-10vh); */
+}
+
+.order-modal p {
+  color: var(--rose300);
+  padding-bottom: 2em;
+}
+
+.order-list,
+.confirmed-total {
+  background-color: var(--rose50);
+  padding: 0.5em 1.5em;
+  border-radius: 7px;
+  /* width: 90%; */
+}
+
+/* .order-list {
+  max-width: 90%;
+} */
+
+.confirmed-item {
+  /* justify-content: space-between;
+  gap: 1em; */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr;
+  gap: 0.5em;
+  padding: 1em 0 0.5em;
+}
+
+.confirmed-item-name {
+  padding-bottom: 0.5em;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+}
+
+/* .confirmed-item-info {
+  width: 50%;
+} */
+
+.confirmed-item-figs {
+  /* width: fit-content; */
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 1em;
+}
+
+.confirmed-item-quant,
+.confirmed-item-price {
+  font-size: clamp(0.87rem, 4vw, 1rem);
+}
+
+.confirmed-item-total {
+  align-self: center;
+  /* font-weight: 600; */
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+}
+
+.total-container {
+  display: flex;
+  /* align-items: center; */
+}
+
+.item-thumb {
+  height: fit-content;
+}
+
+.item-img {
+  border-radius: 4px;
+  min-width: 50px;
+  /* width: clamp(41px, 1vw, 100%); */
+  height: 50px;
+  flex: none;
 }
 
 .overlay {
@@ -420,10 +505,6 @@ h3 {
   z-index: 1;
 }
 
-.item-thumb img {
-  width: 40px;
-  height: 40px;
-}
 
 @media screen and (min-width:800px) {
   .main-container {
@@ -490,7 +571,12 @@ h3 {
     padding-top: 0.1em;
   } */
 
-  /* CART WITH ITEMS */
+  .order-modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* max-height: 80vh; */
+  }
 }
 
 @media screen and (min-width: 1100px) {

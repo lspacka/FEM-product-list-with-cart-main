@@ -186,12 +186,38 @@ buttons.forEach((button, index) => {
                 items.forEach((orderItem, orderIndex) => {
                     const modal_item = orderItem.cloneNode(true)
                     const remove_button = modal_item.querySelector('.remove-item')
+                    const confirmed_item_info = modal_item.querySelector('.item-info')
+                    const confirmed_item_name = modal_item.querySelector('.item-name')
+                    const total_container = document.createElement('div')
+                    const confirmed_item_figs = modal_item.querySelector('.item-figs')
+                    const confirmed_item_quant = confirmed_item_figs.querySelector('.item-quantity')
+                    const confirmed_item_price = confirmed_item_figs.querySelector('.item-price')
+                    
+                    confirmed_item_info.classList.add('confirmed-item-info')
+                    confirmed_item_name.classList.add('confirmed-item-name')
+                    confirmed_item_figs.className = 'confirmed-item-figs'
+                    confirmed_item_quant.classList.add('confirmed-item-quant')
+                    confirmed_item_price.classList.add('confirmed-item-price')
+                    total_container.className = 'total-container'
 
+                    // relocating the item total cos I dont like using transform:translate
+                    // edit: fucking headache, I should've just used transform:translate
+                    const confirmed_item_total = confirmed_item_figs.querySelector('.item-total')
+                    const item_total_copy = confirmed_item_total.cloneNode(true)
+
+                    item_total_copy.className = 'confirmed-item-total'
+                    confirmed_item_figs.removeChild(confirmed_item_total)
+                    total_container.append(item_total_copy)
+                    modal_item.append(total_container)
+                    
+                    // remove the X button and add thumbnail
+                    modal_item.classList.add('confirmed-item')
                     modal_item.removeChild(remove_button)
                     const thumbnail = modal_item.querySelector('.item-thumb')
                     const item_img = document.createElement('img')
 
                     item_img.setAttribute('src', `assets/images/image-${modal_item.id}-thumbnail.jpg`)
+                    item_img.className = 'item-img'
                     thumbnail.append(item_img)
                     order_list.append(modal_item)
                 })
