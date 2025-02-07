@@ -410,17 +410,30 @@ h3 {
 
 /* MODAL */
 
-.order-modal {
+/* .order-modal {
   display: none;
   z-index: 2;
   margin: 0 auto;
   background: white;
-  /* width: fit-content; */
   padding: 2em 1.5em 1.5em;
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
   top: 5%;
-  /* transform: translateY(-10vh); */
+} */
+
+.order-modal {
+  position: absolute;
+  top: 10%; /* Anchor the modal at the top */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  background: white;
+  padding: 2em 1.5em 1.5em;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  overflow-y: auto; 
+  z-index: 2;
+  display: none;
 }
 
 .order-modal p {
@@ -571,12 +584,12 @@ h3 {
     padding-top: 0.1em;
   } */
 
-  .order-modal {
+  /* .order-modal {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* max-height: 80vh; */
-  }
+    overflow-y: auto;
+  } */
 }
 
 @media screen and (min-width: 1100px) {
