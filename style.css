@@ -1,8 +1,10 @@
 /* 
   TODO:
-    - fix layout shift when clicking order button + -
-    - fix order button items centering on desktop
+    + fix image shift when active border
     - fix + - buttons padding on mobile
+    - fix order button items centering on desktop
+    - fix layout shift when clicking order button + -
+    - fix space at active cart header
 */
 
 @font-face {
@@ -70,6 +72,7 @@ h3, .dessert-info p {
   background-position: center;
   aspect-ratio: 16/10;
   border-radius: 7px;
+  /* transition: ease-in 0.05s; */
 }
 
 .waffle-img {

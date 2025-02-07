@@ -2,6 +2,7 @@ const desserts_data = document.querySelectorAll('.dessert-info')
 const buttons = document.querySelectorAll('.add-button')
 const cart_items = document.querySelector('.cart-items')
 const cart_content = document.querySelector('.cart-content')
+const dessert_images = document.querySelectorAll('.dessert-img')
 const desserts = []
 let cart = []
 let order_quant = 0
@@ -32,6 +33,10 @@ for (let data of desserts_data) {
     dessert.id = data.parentElement.classList[1]
     desserts.push(dessert)
 }
+
+dessert_images.forEach((dessertImage, imageIndex) => {
+    dessertImage.setAttribute('id', `img-${imageIndex}`)
+})
 
 cart_items.textContent = `(${order_quant})`
 const ul = document.createElement('ul')
@@ -78,6 +83,11 @@ buttons.forEach((button, index) => {
                 </div>
             `
             button.classList.add('active')
+
+            const dessert_image = document.getElementById(`img-${index}`)
+            dessert_image.style.outline = 'solid 2px hsl(14, 86%, 42%)'
+            // dessert_image.style.border = 'solid 2px hsl(14, 86%, 42%)'
+            // console.log(dessert_image)
             
             /////////  RENDER CART ITEMS //////////
 
@@ -158,37 +168,6 @@ buttons.forEach((button, index) => {
 
             item.append(item_thumb, item_info, remove_item)
             item_list.append(item)
-
-            // const items = document.querySelectorAll('.item')
-            // const confirmed_label = document.querySelector('.cot-label-2')
-            // const new_order_btn = document.querySelector('.new-order')
-
-            // confirm_order.addEventListener('click', () => {
-            //     if (!item_list.hasChildNodes())
-            //         return
-
-            //     order_modal.style.display = 'block'
-            //     overlay.style.display = 'block'
-            //     // document.body.style.position = 'fixed'
-            //     confirmed_label.textContent = total_label.textContent
-                
-            //     items.forEach((orderItem, orderIndex) => {
-            //         const modal_item = orderItem.cloneNode(true)
-            //         const remove_button = modal_item.querySelector('.remove-item')
-
-            //         modal_item.removeChild(remove_button)
-            //         const thumbnail = modal_item.querySelector('.item-thumb')
-            //         const item_img = document.createElement('img')
-
-            //         item_img.setAttribute('src', `assets/images/image-${modal_item.id}-thumbnail.jpg`)
-            //         thumbnail.append(item_img)
-            //         order_list.append(modal_item)
-            //     })
-            // })
-
-            // new_order_btn.addEventListener('click', () => {
-            //     console.log('RESET!')
-            // })
 
             //////////////////////////////////////
 
@@ -282,15 +261,8 @@ buttons.forEach((button, index) => {
                 // console.log('this index total: ', total)
             })
             // button.style.padding = '0.7em 0 0.7em 0'
-            // change cart
         } else {
           return  
         }
-        // desserts[index].quantity++
-        // console.log(cart)
     })
 })
-
-// console.log(cart)
-// console.log(desserts)
-// console.log(desserts_data[0].firstElementChild)
