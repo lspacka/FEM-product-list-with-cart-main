@@ -1,17 +1,13 @@
 /* 
   TODO:
     + fix image shift when active border
-    - fix + - buttons padding on mobile
-    - fix order button items centering on desktop
+    + fix + - buttons padding on mobile
+    + fix order button items centering on desktop
     - fix layout shift when clicking order button + -
-    - fix padding on remove item buttons
-    - fix space at active cart header
+    + fix padding on remove item buttons
+    + fix space at active cart header
+    + fix tree img
 */
-
-/* @font-face {
-  font-family: 'red hat';
-  src: url(assets/fonts/RedHatText-VariableFont_wght.ttf);
-} */
 
 :root {
   --red:     hsl(14, 86%, 42%);
@@ -21,7 +17,6 @@
   --rose300: hsl(14, 25%, 72%);
   --rose500: hsl(12, 20%, 44%);
   --rose900: hsl(14, 65%, 9%);
-  --wat: hsl(16, 11%, 20%);
   --rem-gray: rgb(203, 177, 169);
 }
 
@@ -48,6 +43,10 @@ img {
   align-self: center;
 }
 
+.dummy-h2 {
+  display: none;
+}
+
 h3, .dessert-info p {       
   font-weight: 600;
 }
@@ -68,12 +67,15 @@ h3, .dessert-info p {
   padding-bottom: 1.5em;
 }
 
-.dessert-img {
+.img-inactive {
   background-size: cover;
   background-position: center;
   aspect-ratio: 16/10;
   border-radius: 7px;
-  /* transition: ease-in 0.05s; */
+}
+
+.img-active {
+  outline: solid 2px var(--red);
 }
 
 .waffle-img {
@@ -112,21 +114,6 @@ h3, .dessert-info p {
   background-image: url(assets/images/image-panna-cotta-mobile.jpg);
 }
 
-/* .add-button {
-  display: flex;
-  place-content: center;
-  gap: 7px;
-  padding: 0.5em 0;
-  border: 1.5px solid var(--rose300);
-  width: 60%;  
-  border-radius: 50px;
-  margin: 0 auto;
-  font-size: 0.72rem;  
-  background-color: white;
-  transform: translateY(-50%);
-  height: 37.5px;
-} */
-
 .inactive {
     display: flex;
     place-content: center;
@@ -148,9 +135,10 @@ h3, .dessert-info p {
   justify-content: space-evenly;
   align-items: center;
   cursor: initial;
+  transition: ease-in-out .2s;
 }
 
-.add-button:hover {
+.inactive:hover {
   cursor: pointer;
   border-color: var(--red);
   color: var(--red);
@@ -158,8 +146,6 @@ h3, .dessert-info p {
 
 .no-hover:hover {
   cursor: default;
-  /* border-color: initial;
-  color: initial; */
 }
 
 
@@ -170,11 +156,12 @@ h3 {
 .dec-quant, .inc-quant {
   width: 15px;
   height: 15px;
-  padding: 0.1em;
+  padding: 0.2em;
   border: 1.5px solid white;
   display: flex;
   place-content: center;
   border-radius: 50%;
+  transition: ease-in-out .2s;
 }
 
 .dec-quant:hover,
@@ -197,6 +184,10 @@ h3 {
     contrast(93%);
 }
 
+.ol-container {
+  display: flex;
+}
+
 .order-label {
   margin-left: 2em;
   margin-right: 2em;
@@ -207,8 +198,6 @@ h3 {
 .order-img {
   width: 100%;
   height: 100%;
-  /* align-content: center; */
-  /* border-radius: 50%; */
   stroke-width: 5px;
   filter: 
     brightness(0) 
@@ -270,13 +259,8 @@ h3 {
   padding-top: 1em;
 }
 
-/* .item-info {
-  gap: 2em;
-} */
-
 .item-figs {
   display: flex;
-  /* justify-content: space-between; */
   gap: 1.1em;
   padding: 0.5em 0 0.9em;
   font-size: clamp(0.9rem, 4vw, 1rem);
@@ -312,12 +296,9 @@ h3 {
 .remove-item {
   margin-left: auto;
   align-self: center;
-  width: 15px;
-  height: 15px;
+  width: clamp(15px, 4vw, 16.5px);
+  height: clamp(15px, 4vw, 16.5px);
   transform: translateY(-50%);
-  
-  /* border: 1.5px solid var(--rem-gray);
-  border-radius: 50%; */
 }
 
 .remove-icon {
@@ -325,7 +306,7 @@ h3 {
   height: 100%;
   border: 1.5px solid var(--rem-gray);
   border-radius: 50%;
-  padding: 0.1em;
+  padding: 0.12em;   
   transition: ease-in-out 0.3s
 }
 
@@ -365,14 +346,6 @@ h3 {
   font-size: clamp(1.2rem, 5vw, 1.7rem);
 }
 
-/* .ot-label-2 {
-  font-size: clamp(1.2rem, 5vw, 1.7rem);
-} */
-
-/* .cot-label-2 {
-  font-size: 
-} */
-
 .carbon-free {
   display: flex;
   justify-content: center;
@@ -380,15 +353,16 @@ h3 {
   background-color: var(--rose100);
   border-radius: 5px;
   padding: 1em;
-  font-size: clamp(0.68rem, 3vw, 1rem);
+  font-size: clamp(0.68rem, 3vw, 0.9rem);
 }
 
 .tree {
   height: fit-content;
+  width: fit-content;
 }
 
 .tree-img {
-  inline-size: 80%;
+  inline-size: clamp(80%, 5vw, 100%);
 }
 
 .carbon-msg {
@@ -408,24 +382,18 @@ h3 {
   border-radius: 50px;
 }
 
-/* MODAL */
+.confirm-order:hover,
+.new-order:hover {
+  cursor: pointer;
+}
 
-/* .order-modal {
-  display: none;
-  z-index: 2;
-  margin: 0 auto;
-  background: white;
-  padding: 2em 1.5em 1.5em;
-  border-radius: 10px;
-  position: absolute;
-  top: 5%;
-} */
+/* MODAL */
 
 .order-modal {
   position: absolute;
-  top: 10%; /* Anchor the modal at the top */
+  top: 10%; 
   left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
+  transform: translateX(-50%); 
   background: white;
   padding: 2em 1.5em 1.5em;
   border-radius: 10px;
@@ -446,16 +414,9 @@ h3 {
   background-color: var(--rose50);
   padding: 0.5em 1.5em;
   border-radius: 7px;
-  /* width: 90%; */
 }
 
-/* .order-list {
-  max-width: 90%;
-} */
-
 .confirmed-item {
-  /* justify-content: space-between;
-  gap: 1em; */
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: 1fr;
@@ -468,14 +429,8 @@ h3 {
   font-size: clamp(0.8rem, 3vw, 1rem);
 }
 
-/* .confirmed-item-info {
-  width: 50%;
-} */
-
 .confirmed-item-figs {
-  /* width: fit-content; */
   display: flex;
-  /* justify-content: space-between; */
   gap: 1em;
 }
 
@@ -486,13 +441,11 @@ h3 {
 
 .confirmed-item-total {
   align-self: center;
-  /* font-weight: 600; */
   font-size: clamp(0.9rem, 3vw, 1.1rem);
 }
 
 .total-container {
   display: flex;
-  /* align-items: center; */
 }
 
 .item-thumb {
@@ -502,7 +455,6 @@ h3 {
 .item-img {
   border-radius: 4px;
   min-width: 50px;
-  /* width: clamp(41px, 1vw, 100%); */
   height: 50px;
   flex: none;
 }
@@ -530,6 +482,9 @@ h3 {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
     gap: 1.2em;
+  }
+  .dec-quant, .inc-quant {
+    padding: 0.1em;
   }
   .dessert-img {
     aspect-ratio: 1;
@@ -580,16 +535,12 @@ h3 {
   .add-button img {
     inline-size: 85%;
   }
-  /* h3 {
-    padding-top: 0.1em;
-  } */
-
-  /* .order-modal {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow-y: auto;
-  } */
+  .remove-icon {
+    padding: 0.15em;
+  }
+  .carbon-free {
+    gap: 0.5em;
+  }
 }
 
 @media screen and (min-width: 1100px) {
@@ -635,6 +586,9 @@ h3 {
     width: 60%;
     font-size: 0.67rem;
     height: 35.8px;
+  }
+  .active {
+    padding: 0.5em 0;
   }
   h3 {
     padding: 0;

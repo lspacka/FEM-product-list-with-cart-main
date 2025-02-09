@@ -13,11 +13,11 @@ Users should be able to:
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
 
-### Screenshot
+![](./screenshot.png)
 
 ### Links
 
-- [Solution](https://your-solution-url.com)
+- [Solution](https://www.frontendmentor.io/solutions/product-list-with-cart-BOBjZXOKLS)
 - [Live Site](https://lspacka.github.io/FEM-product-list-with-cart-main/)
 
 ### Built with

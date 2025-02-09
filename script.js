@@ -38,14 +38,19 @@ dessert_images.forEach((dessertImage, imageIndex) => {
     dessertImage.setAttribute('id', `img-${imageIndex}`)
 })
 
-cart_items.textContent = `(${order_quant})`
+cart_items.innerHTML = `&nbsp;(${order_quant})`
+// cart_items.textContent = `(${order_quant})`
 const ul = document.createElement('ul')
 let cart_elements = document.createElement('div')
 ul.className = 'item-list'
 let cart_index = 0
 
 buttons.forEach((button, index) => {
+    const dessert_image = document.getElementById(`img-${index}`)
+
+    dessert_image.classList.add('img-inactive')
     button.classList.add('inactive')
+
     button.addEventListener('click', () => {
         if (!cart.includes(desserts[index])) {
             cart.push(desserts[index])
@@ -77,17 +82,15 @@ buttons.forEach((button, index) => {
                 <div class="dec-quant" id="dec-${index}">
                     <img src="assets/images/icon-decrement-quantity.svg" alt="decrement sign" class="order-img" >
                 </div>
-                <label class="order-label" id="label-${index}">${desserts[index].quantity}</label>
+                <div class="ol-container">
+                    <label class="order-label" id="label-${index}">${desserts[index].quantity}</label>
+                </div>
                 <div class="inc-quant" id="inc-${index}">
                     <img src="assets/images/icon-increment-quantity.svg" alt="increment sign" class="order-img">
                 </div>
             `
             button.classList.add('active')
-
-            const dessert_image = document.getElementById(`img-${index}`)
-            dessert_image.style.outline = 'solid 2px hsl(14, 86%, 42%)'
-            // dessert_image.style.border = 'solid 2px hsl(14, 86%, 42%)'
-            // console.log(dessert_image)
+            dessert_image.classList.add('img-active')
             
             /////////  RENDER CART ITEMS //////////
 
@@ -148,7 +151,8 @@ buttons.forEach((button, index) => {
                 if (total < 0)
                     total = 0
 
-                cart_items.textContent = `(${order_quant})`
+                // cart_items.textContent = `(${order_quant})`
+                cart_items.innerHTML = `&nbsp;(${order_quant})`
                 order_label.textContent = `${desserts[index].quantity}`
                 total_label.textContent = `$${total.toFixed(2)}`
 
@@ -161,6 +165,7 @@ buttons.forEach((button, index) => {
                     <h3>Add to Cart</h3>
                 `
                 button.classList.remove('active')
+                dessert_image.classList.remove('img-active')
             })
 
             remove_item.append(remove_icon)
@@ -200,8 +205,8 @@ buttons.forEach((button, index) => {
                     confirmed_item_price.classList.add('confirmed-item-price')
                     total_container.className = 'total-container'
 
-                    // relocating the item total cos I dont like using transform:translate
-                    // edit: fucking headache, I should've just used transform:translate
+                    // relocating the item total label cos I dont like using transform:translate
+                    // edit: fucking headache, should've just used transform:translate
                     const confirmed_item_total = confirmed_item_figs.querySelector('.item-total')
                     const item_total_copy = confirmed_item_total.cloneNode(true)
 
@@ -235,7 +240,8 @@ buttons.forEach((button, index) => {
 
             order_quant++
             total += desserts[index].price
-            cart_items.textContent = `(${order_quant})`
+            // cart_items.textContent = `(${order_quant})`
+            cart_items.innerHTML = `&nbsp;(${order_quant})`
             total_label.textContent = `$${total.toFixed(2)}`
 
             dec_btn.addEventListener('click', () => {
@@ -247,7 +253,8 @@ buttons.forEach((button, index) => {
                 total -= desserts[index].price
                 
                 order_label.textContent = `${desserts[index].quantity}`
-                cart_items.textContent = `(${order_quant})`
+                // cart_items.textContent = `(${order_quant})`
+                cart_items.innerHTML = `&nbsp;(${order_quant})`
                 item_quantity.textContent = `${desserts[index].quantity}x`
                 item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
 
@@ -255,15 +262,6 @@ buttons.forEach((button, index) => {
                     total_label.textContent = `$${total}`
                 else
                     total_label.textContent = `$${total.toFixed(2)}`
-
-                // console.log(index)
-                // console.log(cart)
-                // console.log('order quantity: ', order_quant)
-                // console.log(typeof desserts[index].price)
-                // console.log(desserts[index].quantity)
-                // console.log(desserts[index])
-                // console.log('this index price: ', desserts[index].price)
-                // console.log('this index total: ', total)
             })
 
             inc_btn.addEventListener('click', () => {
@@ -273,18 +271,11 @@ buttons.forEach((button, index) => {
                 total += desserts[index].price
 
                 order_label.textContent = `${desserts[index].quantity}`
-                cart_items.textContent = `(${order_quant})`
+                // cart_items.textContent = `(${order_quant})`
+                cart_items.innerHTML = `&nbsp;(${order_quant})`
                 total_label.textContent = `$${total.toFixed(2)}`
                 item_quantity.textContent = `${desserts[index].quantity}x`
                 item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
-
-                // console.log(index)
-                // console.log(cart)
-                // console.log('order quantity', order_quant)
-                // console.log(desserts[index].quantity)
-                // console.log(desserts[index])
-                // console.log('this index price: ', desserts[index].price)
-                // console.log('this index total: ', total)
             })
             // button.style.padding = '0.7em 0 0.7em 0'
         } else {
