@@ -39,7 +39,6 @@ dessert_images.forEach((dessertImage, imageIndex) => {
 })
 
 cart_items.innerHTML = `&nbsp;(${order_quant})`
-// cart_items.textContent = `(${order_quant})`
 const ul = document.createElement('ul')
 let cart_elements = document.createElement('div')
 ul.className = 'item-list'
@@ -130,7 +129,7 @@ buttons.forEach((button, index) => {
             remove_icon.setAttribute('alt', 'remove icon')
 
             item_name.textContent = `${desserts[index].name}`
-            item_quantity.textContent = `${desserts[index].quantity}x`   // !
+            item_quantity.textContent = `${desserts[index].quantity}x`   
             item_price.textContent = `@$${desserts[index].price.toFixed(2)}` 
             item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
 
@@ -138,7 +137,6 @@ buttons.forEach((button, index) => {
             item_info.append(item_name, item_figs)
 
             remove_icon.setAttribute('id', `remove-${cart_index}`)
-            // item.setAttribute('id', `${cart_index}`)    
 
             remove_icon.addEventListener('click', () => {
                 cart.splice(desserts[index].index, 1)
@@ -151,7 +149,6 @@ buttons.forEach((button, index) => {
                 if (total < 0)
                     total = 0
 
-                // cart_items.textContent = `(${order_quant})`
                 cart_items.innerHTML = `&nbsp;(${order_quant})`
                 order_label.textContent = `${desserts[index].quantity}`
                 total_label.textContent = `$${total.toFixed(2)}`
@@ -162,7 +159,7 @@ buttons.forEach((button, index) => {
                 // reset button to inital state
                 button.innerHTML = `
                     <div class="cart-img"><img src="assets/images/icon-add-to-cart.svg" alt="cart icon"></div>
-                    <h3>Add to Cart</h3>
+                    <p>Add to Cart</p>
                 `
                 button.classList.remove('active')
                 dessert_image.classList.remove('img-active')
@@ -185,7 +182,6 @@ buttons.forEach((button, index) => {
 
                 order_modal.style.display = 'block'
                 overlay.style.display = 'block'
-                // document.body.style.position = 'fixed'
                 confirmed_label.textContent = total_label.textContent
                 
                 items.forEach((orderItem, orderIndex) => {
@@ -240,7 +236,6 @@ buttons.forEach((button, index) => {
 
             order_quant++
             total += desserts[index].price
-            // cart_items.textContent = `(${order_quant})`
             cart_items.innerHTML = `&nbsp;(${order_quant})`
             total_label.textContent = `$${total.toFixed(2)}`
 
@@ -253,7 +248,6 @@ buttons.forEach((button, index) => {
                 total -= desserts[index].price
                 
                 order_label.textContent = `${desserts[index].quantity}`
-                // cart_items.textContent = `(${order_quant})`
                 cart_items.innerHTML = `&nbsp;(${order_quant})`
                 item_quantity.textContent = `${desserts[index].quantity}x`
                 item_total.textContent = `$${(desserts[index].price * desserts[index].quantity).toFixed(2)}`
@@ -271,15 +265,13 @@ buttons.forEach((button, index) => {
                 total += desserts[index].price
 
                 order_label.textContent = `${desserts[index].quantity}`
-                // cart_items.textContent = `(${order_quant})`
                 cart_items.innerHTML = `&nbsp;(${order_quant})`
                 total_label.textContent = `$${total.toFixed(2)}`
                 item_quantity.textContent = `${desserts[index].quantity}x`
                 item_total.textContent = `$${(desserts[index].total).toFixed(2)}`
             })
-            // button.style.padding = '0.7em 0 0.7em 0'
         } else {
-          return  
+            return  
         }
     })
 })

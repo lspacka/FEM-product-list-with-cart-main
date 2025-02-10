@@ -47,7 +47,7 @@ img {
   display: none;
 }
 
-h3, .dessert-info p {       
+.add-button p, .dessert-info p {       
   font-weight: 600;
 }
 
@@ -118,12 +118,12 @@ h3, .dessert-info p {
     display: flex;
     place-content: center;
     gap: 7px;
-    padding: 0.5em 0;
+    padding: 0.6em 0;
     border: 1.5px solid var(--rose300);
     width: 60%;  
     border-radius: 50px;
     margin: 0 auto;
-    font-size: 0.72rem;  
+    font-size: 0.8rem;  /*0.72rem*/
     background-color: white;
     transform: translateY(-50%);
     height: 37.5px;
@@ -134,7 +134,6 @@ h3, .dessert-info p {
   border: none;
   justify-content: space-evenly;
   align-items: center;
-  cursor: initial;
   transition: ease-in-out .2s;
 }
 
@@ -144,14 +143,18 @@ h3, .dessert-info p {
   color: var(--red);
 }
 
+.active:hover {
+  cursor: default;
+}
+
 .no-hover:hover {
   cursor: default;
 }
 
 
-h3 {
+/* .add-button p {
   padding-top: 0.1em;
-}
+} */
 
 .dec-quant, .inc-quant {
   width: 15px;
@@ -192,7 +195,7 @@ h3 {
   margin-left: 2em;
   margin-right: 2em;
   color: white;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .order-img {
@@ -527,9 +530,10 @@ h3 {
   
   .add-button {
     gap: 0;
-    padding: 0.6em 0 0.4em; 
+    padding: 0.55em;
+    /* padding: 0.6em 0 0.4em;  */
     width: 85%;  
-    font-size: 0.6rem;  
+    font-size: 0.75rem;  
     height: 31.9px
   }
   .add-button img {
@@ -582,9 +586,10 @@ h3 {
 
   .add-button {
     gap: 4px;
-    padding: 0.7em 0 0.5em;
+    /* padding: 0.7em 0 0.5em; */
+    /* padding: 0.55em 0; */
     width: 60%;
-    font-size: 0.67rem;
+    font-size: 0.8rem;
     height: 35.8px;
   }
   .active {
