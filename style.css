@@ -238,6 +238,10 @@ img {
   height: fit-content;
 }
 
+.cart {
+  position: sticky; top: 50px;
+}
+
 .cart-header {
   display: flex;
   margin-bottom: 0.5em;

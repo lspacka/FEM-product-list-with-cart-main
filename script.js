@@ -173,18 +173,20 @@ buttons.forEach((button, index) => {
 
             //////////////////////////////////////
 
-            const items = document.querySelectorAll('.item')
+            const items = item_list.childNodes
             const confirmed_label = document.querySelector('.cot-label-2')
 
             confirm_order.addEventListener('click', () => {
                 if (!item_list.hasChildNodes())
                     return
 
+                window.scrollTo({ top: 0, behavior: 'smooth'})
                 order_modal.style.display = 'block'
+                // order_modal.style.position = 'sticky; top: 50px;'
                 overlay.style.display = 'block'
                 confirmed_label.textContent = total_label.textContent
                 
-                items.forEach((orderItem, orderIndex) => {
+                items.forEach(orderItem => {
                     const modal_item = orderItem.cloneNode(true)
                     const remove_button = modal_item.querySelector('.remove-item')
                     const confirmed_item_info = modal_item.querySelector('.item-info')
