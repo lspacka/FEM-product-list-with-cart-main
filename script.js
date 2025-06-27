@@ -182,7 +182,6 @@ buttons.forEach((button, index) => {
 
                 window.scrollTo({ top: 0, behavior: 'smooth'})
                 order_modal.style.display = 'block'
-                // order_modal.style.position = 'sticky; top: 50px;'
                 overlay.style.display = 'block'
                 confirmed_label.textContent = total_label.textContent
                 
